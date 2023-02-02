@@ -35,22 +35,22 @@ function onChangeDate() {
 btnStartEl.addEventListener('click', onTimer)
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
+    // Number of milliseconds per unit of time
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-  // Remaining days
-  const days = Math.floor(ms / day);
-  // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+    // Remaining days
+    const days = Math.floor(ms / day);
+    // Remaining hours
+    const hours = Math.floor((ms % day) / hour);
+    // Remaining minutes
+    const minutes = Math.floor(((ms % day) % hour) / minute);
+    // Remaining seconds
+    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  return { days, hours, minutes, seconds };
+    return { days, hours, minutes, seconds };
 }
 
 const second = document.querySelector('[data-seconds]')
@@ -69,13 +69,15 @@ function onTimer() {
 
         if (second.textContent === '00' && minutes.textContent === '00' &&  hours.textContent === '00' && days.textContent === '00') {
             clearInterval(intervalId)
-            btnStartEl.disabled = false;
         }
     }
         , 1000)
     
+    selectDateEl.removeEventListener('input', onChangeDate)
+    
     btnStartEl.disabled = true;
 }
+
 function addLeadingZero(value) {
     return String(value).padStart(2, '0')
 }
